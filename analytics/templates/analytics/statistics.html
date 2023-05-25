@@ -1,0 +1,69 @@
+{% extends "heart_disease_prediction/base.html" %}
+
+{% block main %}
+
+<section>
+
+    <div class="cards">
+        <div>
+            <p>{{ nr_rows }} rows</p>
+        </div>
+        <div>
+            <p>{{ nr_cols }} features</p>
+        </div>
+    </div>
+
+    {% if numerical %}
+
+    <h2 class="section-header--title">{{ numerical_col_nr_display }} Numerical columns</h2>
+
+    <div class="table-container">
+
+        <div class="table">
+            <div style="grid-template-columns: repeat({{ numerical_col_nr }}, 1fr);"> 
+                <p>Metric</p>
+                {% for col in numerical.columns %}
+                <p>{{col}}</p>
+                {% endfor %}
+            </div>
+
+            {% for row in numerical.data %}
+            <div style="grid-template-columns: repeat({{ numerical_col_nr }}, 1fr);">
+                {% for val in row %}
+                <p>{{ val }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+    {% if categorical %}
+
+    <h2 class="section-header--title">{{ categorical_col_nr_display }} Categorical columns</h2>
+
+    <div class="table-container">
+
+        <div class="table">
+            <div style="grid-template-columns: repeat({{ categorical_col_nr }}, 1fr);"> 
+                <p>Metric</p>
+                {% for col in categorical.columns %}
+                <p>{{col}}</p>
+                {% endfor %}
+            </div>
+
+            {% for row in categorical.data %}
+            <div style="grid-template-columns: repeat({{ categorical_col_nr }}, 1fr);">
+                {% for val in row %}
+                <p>{{ val }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+</section>
+{% endblock %}

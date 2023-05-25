@@ -1,0 +1,33 @@
+{% extends "heart_disease_prediction/base.html" %}
+
+{% block main %}
+
+<section>
+    <div class="section-header">
+        <h2 class="section-header--title">Do you worry about the condition of your heart?</h2>
+        <p class="section-header--subtitle">Complete below questionary to predict if you have heart disease!</p>
+        <p class="section-header--desc">The prediction is based on a <span>K-nearest neighbours (KNN)</span> algorithm
+            that
+            considers<span> {{ col_nr }} input features</span> and it was <span>trained on {{ row_nr }} patients</span>
+        </p>
+    </div>
+</section>
+
+<form action="" method="post">
+
+    <h3 class="form--title">Questions</h3>
+    <p class="form--subtitle">Answer all questions below honestly and the app will output if heart disease can be suspected in your case or not. Please keep in mind, that this is not a substitute to a medical diagnosis!</p>
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="field--container">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+              
+            {{ field.label_tag }} 
+            {{ field }}
+        </div>
+    {% endfor %}
+    <input type="submit" value="PREDICT ≫">
+</form>
+{% endblock %}

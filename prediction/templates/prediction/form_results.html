@@ -1,0 +1,38 @@
+{% extends "heart_disease_prediction/base.html" %}
+
+{% load static %}
+
+
+{% block main %}
+<section>
+
+    <h2 class="section-header--title">Your results</h2>
+    <p class="section-header--desc">Please find on left the answers you gave to the questionnaire. Based on these, the result was generated using a KNN model. Please note, that the results cannot be substituted with a medical specialist's examination. You should visit a doctor for a thorough consultation. </p>
+    <div class="form--responses-container">
+
+        <div class="form--answers">
+
+            {% for ques, resp in form_input.items %}
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+                <p>{{ ques }}: <span>{{ resp }}</span></p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="form--results">
+            
+            {% if prediction %}
+                <h2 class="section-header--title" style="color: #A30000">Heart disease suspected</h2>
+            {% else %}
+                <h2 class="section-header--title">No Heart disease suspected</h2>
+            {% endif %}
+            
+            <img src="{% static 'prediction/image/form-result.svg' %}" alt="" srcset="">
+        </div>
+    </div>
+</section>
+
+{% endblock %}

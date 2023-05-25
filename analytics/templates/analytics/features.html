@@ -1,0 +1,28 @@
+{% extends "heart_disease_prediction/base.html" %}
+
+{% block main %}
+
+<section>
+
+    <h2 class="section-header--title">Data types of the features</h2>
+
+    <div class="table-container">
+
+        <div class="table">
+            <div style="grid-template-columns: repeat({{ nr_cols }}, 1fr);">
+                <p>Feature name</p>
+                <p>dtype</p>
+            </div>
+            {% for col, type in dtypes.items %}
+
+            <div style="grid-template-columns: repeat({{ nr_cols }}, 1fr);">
+                <p>{{ col }}</p>
+                <p>{{ type }}</p>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "heart_disease_prediction/base.html" %}
+
+{% block main %}
+
+<section>
+    <form action="" method="post" class="inspect-data--form">
+        {% csrf_token %}
+
+        <p class="section-header--title">Inspect the
+            {{ form.order }}
+            {{ form.nr }}
+            rows from the dataset</p>
+        <input type="submit" value="≫">
+    </form>
+
+    {% if data_dict %}
+
+    <div class="table-container">
+
+        <div class="table">
+            <div style="grid-template-columns: repeat({{ nr_cols }}, 1fr);">
+                {% for col in data_dict.columns %}
+                <p>{{col}}</p>
+                {% endfor %}
+            </div>
+
+            {% for row in data_dict.data %}
+            <div style="grid-template-columns: repeat({{ nr_cols }}, 1fr);">
+                {% for val in row %}
+                <p>{{ val }}</p>
+                {% endfor %}
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+
+</section>
+
+{% endblock %}
